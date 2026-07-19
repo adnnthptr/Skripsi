@@ -1,4 +1,4 @@
-# skripsi Clustering Bahasa Jepang (Japanese Lemmas Clustering & Translation Analysis)
+# Skripsi Clustering Bahasa Jepang (Japanese Lemmas Clustering & Translation Analysis)
 
 Proyek ini merupakan bagian dari riset tesis untuk mengorganisasi dan mengelompokkan kosakata (lemma) bahasa Jepang berdasarkan tingkat frekuensi penggunaan dan karakteristik linguistiknya menggunakan algoritma "K-Means Clustering", serta menerjemahkannya ke bahasa Indonesia menggunakan model berbasis AI.
 
