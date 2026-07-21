@@ -1,37 +1,37 @@
-# Skripsi Clustering Bahasa Jepang (Japanese Lemmas Clustering & Translation Analysis)
+# (Skripsi) Japanese Lemmas Clustering & Translation Analysis
 
-Proyek ini merupakan bagian dari riset tesis untuk mengorganisasi dan mengelompokkan kosakata (lemma) bahasa Jepang berdasarkan tingkat frekuensi penggunaan dan karakteristik linguistiknya menggunakan algoritma "K-Means Clustering", serta menerjemahkannya ke bahasa Indonesia menggunakan model berbasis AI.
+This project is part of the thesis research to organize and group Japanese vocabulary (lemmas) based on the frequency of use and linguistic characteristics using the "K-Means Clustering" algorithm, and translate it into Indonesian using an AI-based model.
 
-# Alur Kerja Proyek
+# Project Workflow
 
-1. Penerjemahan Otomatis (Machine Translation):
-   * Menerjemahkan 15.000 lemma bahasa Jepang dari `japanese_lemmas.csv` menggunakan model "Neural Machine Translation" (`Helsinki-NLP/opus-mt-ja-en` dan `Helsinki-NLP/opus-mt-en-id`) melalui teknik "pipeline/chain-translation" (JA -> EN -> ID).
-   * Proses komputasi dipercepat menggunakan akselerasi GPU (CUDA).
+1. Machine Translation:
+   * Translate 15,000 Japanese lemmas from `japanese_lemmas.csv` using the "Neural Machine Translation" models (`Helsinki-NLP/opus-mt-ja-en` and `Helsinki-NLP/opus-mt-en-id`) via the "pipeline/chain-translation" technique (JA -> EN -> ID).
+   * The computing process is accelerated using GPU acceleration (CUDA).
 
 2. Feature Engineering & Preprocessing:
-   * Ekstraksi fitur tambahan dari teks Jepang: panjang karakter kata (`lemma_length`) dan rasio penggunaan huruf Kanji (`kanji_ratio`) berbasis Regex.
-   * Standardisasi fitur menggunakan `StandardScaler` sebelum proses clustering.
+   * Additional feature extraction from Japanese text: word character length (`lemma_length`) and Kanji usage ratio (`kanji_ratio`) based on Regex.
+   * Standardize features using `StandardScaler` before the clustering process.
 
 3. K-Means Clustering:
-   * Menentukan jumlah kelompok optimal melalui "Metode Elbow" atau Inertia.
-   * Mengelompokkan kosakata ke dalam "4 cluster" utama berdasarkan kombinasi fitur: "Rank, Frequency, Lemma Length, dan "Kanji Ratio".
+   * Determining the optimal number of groups through the "Elbow Method" or Inertia.
+   * Grouping vocabulary into 4 main clusters based on a combination of features: Rank, Frequency, Lemma Length, and Kanji Ratio.
 
-# Karakteristik Cluster
+# Cluster Characteristics
 
-Hasil akhir pengelompokan pada `clustered_japanese_lemmas.csv` memetakan kosakata ke dalam 4 segmentasi kurikulum pengajaran:
-*   Cluster 3 (Grammar Inti / N5): Berisi 10 partikel utama (の, に, は, dll.) dengan frekuensi super tinggi dan tanpa komponen Kanji.
-*   Cluster 0 (Kosakata Dasar / N5-N4): Kata kerja/sifat fungsional harian (ます, ない, いる) berfrekuensi tinggi dengan rasio Kanji rendah.
-*   Cluster 1 (Pola Kalimat Majemuk / N4-N3): Pola tata bahasa dan kata penghubung yang berkarakter panjang (という, できる, として).
-*   Cluster 2 (Kosakata Kanji Tingkat Lanjut / N2-N1): Kata benda abstrak dan istilah formal yang didominasi oleh 95% huruf Kanji (核兵器, 来年度).
+The final clustering results in `clustered_japanese_lemmas.csv` map vocabulary into 4 teaching curriculum segmentations:
+*   Cluster 3 (Core Grammar / N5): Contains 10 main particles (の, に, は, etc.) with super high frequency and no Kanji components.
+*   Cluster 0 (Basic Vocabulary / N5-N4): Daily functional verbs/adjectives (ます, ない, いる) with high frequency and low Kanji ratio.
+*   Cluster 1 (Compound Sentence Patterns / N4-N3): Grammatical patterns and long-character connecting words (という, できる, として).
+*   Cluster 2 (Advanced Kanji Vocabulary / N2-N1): Abstract nouns and formal terms dominated by 95% Kanji characters (核兵器, 来年度).
 
-# Evaluasi Model
+# Model Evaluation
 
-Akurasi dan validasi pengelompokan diukur menggunakan dua metrik utama:
-*   Silhouette Score: `0.387` (menunjukkan pemisahan struktur cluster yang cukup baik).
-*   Davies-Bouldin Index: `0.728` (nilai di bawah 1.0 membuktikan tingkat kerapatan internal tiap cluster sangat tinggi).
+Clustering accuracy and validation are measured using two main metrics:
+*   Silhouette Score: `0.387` .
+*   Davies-Bouldin Index: `0.728` .
 
-#  Tech Stack & Dependensi
+#  Tech Stack & Dependencies
 
 *   Language: Python 3.12+
 *   Libraries: `pandas`, `torch` (CUDA Enabled), `transformers` (Helsinki-NLP Models), `tqdm`, `scikit-learn`, `matplotlib`, `seaborn`
-*   Hardware: Diuji pada NVIDIA GeForce RTX 5050 Laptop GPU
+*   Hardware: Tested on NVIDIA GeForce RTX 5050 Laptop GPU
